@@ -6,6 +6,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com)
 ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwindcss&logoColor=white)
+![Status](https://img.shields.io/badge/status-produção-success)
 
 > 🔒 **Case anonimizado.** Sem nome de cliente, credenciais ou dados reais.
 
@@ -39,12 +40,12 @@ Um dashboard em **Next.js (App Router)** sobre **Supabase**, com isolamento **mu
 
 ```mermaid
 flowchart TD
-    USER[👤 Clínica logada] --> APP[Next.js App Router]
+    USER[👤 Acesso da clínica<br/>via location/CRM] --> APP[Next.js App Router]
     APP --> CTX[schema-context<br/>resolve o tenant]
     CTX --> SB[(Supabase<br/>schema da clínica)]
-    APP --> RAG[/rag → edita conhecimento/]
-    APP --> HOR[/horarios → agenda/]
-    APP --> FUP[/followup → reativação/]
+    APP --> RAG["/rag — edita conhecimento"]
+    APP --> HOR["/horarios — agenda"]
+    APP --> FUP["/followup — reativação"]
     RAG -->|on save| EMB[⚡ Edge Function<br/>gera embedding]
     EMB --> SB
     HOR --> SB
@@ -55,7 +56,7 @@ flowchart TD
 
 ## 🧩 Destaques técnicos
 
-- **Multi-tenant por schema:** cada clínica vive num schema Postgres próprio (não um filtro de `clinic_id` em linha) — isolamento forte de dados por design. Um `schema-context` resolve qual tenant a sessão acessa.
+- **Multi-tenant por schema:** cada clínica vive num schema Postgres próprio (não um filtro de `clinic_id` em linha) — separação de dados por design. Um `schema-context` resolve qual tenant é acessado a partir do parâmetro de location vindo do CRM (autenticação de login está no roadmap; o acesso aos dados é protegido por RLS sobre a anon key).
 - **App Router + Server Components:** Next.js moderno, com `redirect` server-side e query string preservada entre rotas.
 - **Edição que vira IA:** salvar conteúdo no `/rag` aciona a [Edge Function de embedding](https://github.com/iTristaoo/rag-knowledge-base) — o que a clínica escreve já fica buscável pelo agente.
 - **Componentes próprios:** toggle de IA, input de horário, sidebar — UI enxuta focada no que o cliente precisa.
@@ -73,10 +74,11 @@ flowchart TD
 
 ## 📈 Resultados
 
-> Exemplos do que medir:
-> - 🙌 Autonomia do cliente (atualiza info sem pedir pro time técnico)
-> - ⏱️ Tempo pra subir uma clínica nova
-> - 🔧 Redução de chamados de suporte
+- 🙌 **Cliente atualiza a própria info** (preço, horário, conhecimento) sem depender do time técnico.
+- ⏱️ Sobe **clínica nova mais rápido** — cadastra e já entra no ar.
+- 🔧 Menos chamados de suporte pra ajuste simples.
+
+<!-- iTristaoo: se tiver número real, some aqui. Não invente. -->
 
 ---
 
@@ -84,3 +86,12 @@ flowchart TD
 
 - [rag-knowledge-base](https://github.com/iTristaoo/rag-knowledge-base) — o que a edição em `/rag` alimenta
 - [ai-followup-automation](https://github.com/iTristaoo/ai-followup-automation) — exibido e controlado em `/followup`
+- [meta-ads-attribution](https://github.com/iTristaoo/meta-ads-attribution) — origem dos dados de atribuição/gasto do mesmo ecossistema
+
+---
+
+## 📲 Quer um agente desses no seu negócio?
+
+**Construo automações e agentes de IA sob medida.** Bora conversar — me chama.
+
+<!-- iTristaoo: troque pelos seus links reais → ex: [WhatsApp](https://wa.me/55SEUNUMERO) · [Email](mailto:seu@email.com) -->
